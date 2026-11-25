@@ -1,0 +1,26 @@
+{
+  "name": "Brújula · Finanzas personales",
+  "short_name": "Brújula",
+  "description": "Tus finanzas en orden: bancos, tarjetas, inversiones, deudas, patrimonio y control de ingresos y gastos mes a mes.",
+  "lang": "es",
+  "dir": "ltr",
+  "id": "./",
+  "start_url": "./#/inicio",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#F3F5FB",
+  "theme_color": "#4F46E5",
+  "categories": ["finance", "productivity"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Anotar un gasto", "short_name": "Gasto", "url": "./#/inicio?nuevo=gasto", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Ingresos y gastos del mes", "short_name": "Mes", "url": "./#/mes", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}
