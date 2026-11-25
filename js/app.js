@@ -12,7 +12,7 @@ import {
   openAssetForm, openGoalForm, openGoalMove, openRecurringForm, openBudgetEditor, toggleArchive, registerRecurring,
 } from './entityforms.js';
 import { downloadBackup } from './backup.js';
-import { isStandalone, openInstallHelp } from './install.js';
+import { isStandalone, openInstallHelp, canPrompt, promptInstall } from './install.js';
 import * as inicio from './views/inicio.js';
 import * as mes from './views/mes.js';
 import * as cuentas from './views/cuentas.js';
@@ -57,6 +57,7 @@ function buildShell() {
       <button type="button" class="btn primary block side-add" data-act="move">${ic('plus', 20)} Anotar movimiento</button>
       <nav class="side-nav">${NAV.map(([g, items]) => html`<p class="side-g">${g}</p>${items.map(([id, l, ico]) => html`<a href="#/${id}" data-nav="${id}">${ic(ico, 20)}<span>${l}</span></a>`)}`)}</nav>
       <div class="side-foot">
+        <button type="button" data-act="install" class="side-btn side-install" hidden>${ic('download', 20)}<span>Instalar en este equipo</span></button>
         <a href="#/ajustes" data-nav="ajustes">${ic('settings', 20)}<span>Ajustes</span></a>
         <button type="button" data-act="toggle-hide" class="side-btn">${ic('eye', 20)}<span>Ocultar montos</span></button>
       </div>
@@ -89,6 +90,8 @@ function applySettings(S) {
   document.querySelectorAll('meta[name="theme-color"]').forEach((m) => { m.setAttribute('content', dark ? '#0B1020' : '#F3F5FB'); m.removeAttribute('media'); });
   const hb = document.querySelector('.side-btn[data-act="toggle-hide"]');
   if (hb) hb.innerHTML = icon(st.hide ? 'eyeoff' : 'eye', 20) + `<span>${st.hide ? 'Mostrar montos' : 'Ocultar montos'}</span>`;
+  const ib = document.querySelector('.side-install');
+  if (ib) ib.hidden = isStandalone() || !st.onboarded;
 }
 
 // ---------- Pintar la pantalla ----------
@@ -189,7 +192,7 @@ const GLOBAL = {
   },
   'toggle-hide': () => { commit((s) => { s.settings.hide = !s.settings.hide; }); },
   dismiss: (b) => { const k = b.dataset.k; commit((s) => { s.ui.dismiss[k] = true; }); },
-  install: () => openInstallHelp(),
+  install: async () => { if (canPrompt()) { if (!(await promptInstall())) openInstallHelp(); } else openInstallHelp(); },
   backup: () => downloadBackup(),
   'close-month': (b) => historial.openCloseWizard(b.dataset.ym),
   'reopen-month': (b) => historial.reopenMonth(b.dataset.ym),

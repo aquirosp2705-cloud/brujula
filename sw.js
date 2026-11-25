@@ -1,7 +1,7 @@
 // Service worker: guarda la app en el equipo para que abra rápido y funcione sin internet.
 // Al publicar una versión nueva, sube VERSION: la app avisa «Hay una versión nueva» y se actualiza al aceptar.
 
-const VERSION = 'v1';
+const VERSION = 'v2';
 const CACHE = 'brujula-' + VERSION;
 const FILES = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',

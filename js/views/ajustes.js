@@ -6,7 +6,7 @@ import { money, fmtDate, parseAmount, amountInput, getFormat } from '../format.j
 import { pageHead, card } from './common.js';
 import { CURRENCIES, GROUPS, APP_NAME, VERSION } from '../config.js';
 import { downloadBackup, shareBackup, canShareFiles, restoreFromFile, exportCSV } from '../backup.js';
-import { isStandalone, openInstallHelp } from '../install.js';
+import { isStandalone, openInstallHelp, canPrompt, promptInstall } from '../install.js';
 import { openCategoryForm, openRecurringForm, openBudgetEditor } from '../entityforms.js';
 import { buildDemo } from '../demo.js';
 
@@ -99,7 +99,7 @@ export const actions = {
   'rec-edit': (b) => { const r = getState().recurring.find((x) => x.id === b.dataset.id); if (r) openRecurringForm(r); },
   'share-backup': () => shareBackup(),
   csv: () => exportCSV(),
-  install: () => openInstallHelp(),
+  install: async () => { if (canPrompt()) { if (!(await promptInstall())) openInstallHelp(); } else openInstallHelp(); },
   'demo-load': async () => {
     const S = getState();
     if (S.accounts.length || S.movements.length) { toast('Primero borra tus datos para ver el ejemplo.'); return; }

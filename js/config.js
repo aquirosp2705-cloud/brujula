@@ -3,7 +3,7 @@
 
 export const APP_NAME = 'Brújula';
 export const APP_TAGLINE = 'Tus finanzas, en orden';
-export const VERSION = '1';
+export const VERSION = '2';
 
 // [código, nombre, símbolo, decimales por defecto]
 export const CURRENCIES = [

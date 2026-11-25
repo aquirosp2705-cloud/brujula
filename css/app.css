@@ -769,6 +769,11 @@ details.archived > summary::-webkit-details-marker { display: none; }
 .guide summary { font-weight: 700; cursor: pointer; }
 .guide ol { display: grid; gap: 7px; margin: 10px 0 4px; padding-left: 20px; color: var(--text2); }
 .install > p { color: var(--text2); }
+.install .inline-note { align-items: flex-start; margin-bottom: 6px; }
+.install .inline-note > span { flex: 1 1 240px; }
+.link-box { display: block; width: 100%; padding: 8px 10px; border-radius: 10px; background: var(--surface); font-size: 13px; word-break: break-all; user-select: all; -webkit-user-select: all; }
+.side-install { color: var(--brand) !important; font-weight: 750 !important; background: var(--brand-soft) !important; margin-bottom: 4px; }
+.side-install:hover { filter: brightness(.97); }
 .budget-top { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .budget-top div { padding: 12px; border-radius: 14px; background: var(--surface2); }
 .budget-top span { display: block; font-size: 12.5px; color: var(--muted); }
